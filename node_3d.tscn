@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://dar38fsgyv1vv"]
+
+[ext_resource type="PackedScene" uid="uid://bavkb1yv2g2w1" path="res://dark purple magician holding staff.glb" id="1_5gppr"]
+[ext_resource type="PackedScene" uid="uid://dyi8n3x38amtj" path="res://blue eyes white dragon.glb" id="2_snv5c"]
+[ext_resource type="Texture2D" uid="uid://ccckfg41bxjhl" path="res://digital_painting_dark_clouds_green_grid.jpg" id="3_77r3g"]
+[ext_resource type="Script" path="res://camerHolder.gd" id="4_t13kf"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="4_vv6db"]
+[ext_resource type="AudioStream" uid="uid://cmfpdq37oc4ho" path="res://battle_music.wav" id="6_hx71g"]
+[ext_resource type="Script" path="res://AudioStreamPlayer3D.gd" id="7_21r2u"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_b523i"]
+panorama = ExtResource("3_77r3g")
+
+[sub_resource type="Sky" id="Sky_62nbb"]
+sky_material = SubResource("PanoramaSkyMaterial_b523i")
+
+[sub_resource type="Environment" id="Environment_ua8gc"]
+background_mode = 2
+sky = SubResource("Sky_62nbb")
+
+[node name="main" type="Node3D"]
+
+[node name="dark purple magician holding staff" parent="." instance=ExtResource("1_5gppr")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -6.70671, 0, 0)
+
+[node name="blue eyes white dragon" parent="." instance=ExtResource("2_snv5c")]
+transform = Transform3D(-20, 0, -3.01992e-06, 0, 20, 0, 3.01992e-06, 0, -20, 10.1986, 0, 0.0243649)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ua8gc")
+
+[node name="camerHolder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94047, 0, 0)
+script = ExtResource("4_t13kf")
+
+[node name="Camera3D" type="Camera3D" parent="camerHolder"]
+transform = Transform3D(1, 0, 0, 0, 0.97871, 0.205248, 0, -0.205248, 0.97871, 0.492655, 1.80718, 20.8517)
+script = ExtResource("4_vv6db")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86013, 0, 0)
+omni_range = 9.727
+omni_attenuation = 0.0167465
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_hx71g")
+autoplay = true
+script = ExtResource("7_21r2u")
